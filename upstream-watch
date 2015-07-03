@@ -9,7 +9,7 @@ MIRROR=http://http.kali.org/kali
 DIST=kali-dev
 WORKDIR=$BASEDIR/work
 PACKAGE_LIST=$BASEDIR/package-list
-VERBOSE=
+#VERBOSE=1
 
 if [ -e $BASEDIR/config ]; then
     . $BASEDIR/config
