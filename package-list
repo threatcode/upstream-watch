@@ -11,7 +11,6 @@ cewl
 clusterd
 cowpatty
 crunch
-dirbuster
 dmitry
 dnmap
 dns2tcp
@@ -86,3 +85,4 @@ winexe
 wireshark
 wpscan
 xplico
+zaproxy
