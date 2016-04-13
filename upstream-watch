@@ -180,7 +180,7 @@ check_new_upstream_versions() {
 	upstream_version=$(get_uscan_field upstream-version)
 	upstream_url=$(get_uscan_field upstream-url)
 	case "$status" in
-	    "Newer version available")
+	    "Newer version available"|"newer package available")
 		log "NEW: $package $upstream_version at $upstream_url"
 		status="OUTDATED_$upstream_version"
 		;;
