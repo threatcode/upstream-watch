@@ -44,7 +44,7 @@ list_packages() {
 extract_field() {
     local pkg=$1
     local field=$2
-    grep-dctrl --exact-match -P $pkg --show-field $field --no-field-names < $WORKDIR/list
+    grep-dctrl --exact-match -P $pkg --show-field $field --no-field-names < $WORKDIR/list || true
 }
 
 dsc_url() {
@@ -56,11 +56,11 @@ dsc_url() {
 
 extract_watch_files() {
     for package in $(list_packages); do
-	version=$(extract_field $package Version)
 	if ! grep -q "Package: $package" $WORKDIR/list; then
 	    echo "WARNING: $package is not available in $DIST" >&2
 	    continue
 	fi
+	version=$(extract_field $package Version)
 	if grep -q ${package}_${version} $WORKDIR/extracted; then
 	    continue
 	fi
