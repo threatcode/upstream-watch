@@ -21,6 +21,8 @@ dnsmap
 dnsrecon
 dradis
 ettercap
+eyewitness
+fern-wifi-cracker
 fimap
 golismero
 hackrf
@@ -35,6 +37,7 @@ kismet
 laudanum
 libnfc
 linux
+lynis
 mana-toolkit
 masscan
 medusa
@@ -64,6 +67,7 @@ recon-ng
 responder
 rfcat
 ridenum
+routersploit
 sakis3g
 sandi
 set
@@ -85,10 +89,12 @@ vfeed
 volatility
 wapiti
 watobo
+wafw00f
 wfuzz
 wifi-honey
 winexe
 wireshark
+wifiphisher
 wpscan
 xplico
 hydra
