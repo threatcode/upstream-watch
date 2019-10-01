@@ -19,14 +19,13 @@ chntpw
 clusterd
 commix
 cowpatty
-creddump
+creddump7
 crunch
 davtest
 dbd
 dirb
 dirbuster
 dmitry
-dnmap
 dns2tcp
 dnschef
 dnsenum
@@ -40,9 +39,6 @@ exe2hexbat
 eyewitness
 fern-wifi-cracker
 fierce
-fimap
-findmyhash
-ghost-phisher
 golismero
 gpp-decrypt
 greenbone-security-assistant
@@ -52,7 +48,6 @@ hashcat
 hashcat-utils
 hashid
 hexinject
-hexorbase
 hydra
 ike-scan
 impacket
@@ -69,8 +64,6 @@ linux
 lynis
 magicrescue
 maltego
-maltego-teeth
-mana-toolkit
 maskprocessor
 masscan
 medusa
@@ -86,7 +79,6 @@ nbtscan
 ncrack
 netdiscover
 netsed
-nfspy
 nikto
 nishang
 nmap
@@ -104,7 +96,6 @@ peepdf
 pipal
 pixiewps
 powersploit
-proxystrike
 pwnat
 python-faraday
 rainbowcrack
