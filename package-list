@@ -41,6 +41,9 @@ fierce
 gpp-decrypt
 greenbone-security-assistant
 guymager
+gvm-libs
+gvm-tools
+gvmd
 hackrf
 hashcat
 hashcat-utils
@@ -82,11 +85,10 @@ nikto
 nishang
 nmap
 onesixtyone
-openvas
-openvas-manager
 openvas-scanner
-openvas-cli
 ophcrack
+ospd
+ospd-openvas
 passing-the-hash
 patator
 pdf-parser
