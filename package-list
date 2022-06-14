@@ -36,6 +36,7 @@ enum4linux
 ettercap
 exe2hexbat
 eyewitness
+ivre
 fern-wifi-cracker
 ffuf
 fierce
@@ -86,6 +87,7 @@ netsed
 nikto
 nishang
 nmap
+nuclei
 onesixtyone
 openvas-scanner
 ophcrack
