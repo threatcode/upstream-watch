@@ -121,7 +121,7 @@ extract_upstream_version() {
 }
 
 get_uscan_field() {
-    xmlstarlet sel -t -v /dehs/$1 < $WORKDIR/tmp/uscan-stdout || true
+    grep '<' $WORKDIR/tmp/uscan-stdout | xmlstarlet sel -t -v /dehs/$1 || true
 }
 
 dump_uscan_data() {
