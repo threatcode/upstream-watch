@@ -121,6 +121,8 @@ extract_upstream_version() {
 }
 
 get_uscan_field() {
+    # Uscan doesn't only output XML valid content, and can break XML parsing
+    # Debian bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1019259
     grep '<' $WORKDIR/tmp/uscan-stdout | xmlstarlet sel -t -v /dehs/$1 || true
 }
 
