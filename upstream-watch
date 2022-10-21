@@ -28,7 +28,7 @@ update_package_list() {
     :> $WORKDIR/list
     for component in main contrib non-free; do
 	wget -q $MIRROR/dists/$DIST/$component/source/Sources.gz -O - | \
-	    gzip -dc >>work/list
+	    gzip -dc >>$WORKDIR/list
     done
 }
 
