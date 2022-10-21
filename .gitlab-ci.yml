@@ -29,13 +29,21 @@ pages:
     - apt-get -y --no-install-recommends install wget devscripts xmlstarlet dctrl-tools
 
   script:
-    # Some watch files uses git
+    # Some debian/watch files use git
     - apt-get -y --no-install-recommends install git
     - echo "WORKDIR=${WORKDIR}" > config
     - echo "VERBOSE=${VERBOSE}" >> config
     - echo "PACKAGE_LIST=${WORKDIR}/package-list" >> config
     - mkdir -pv "${WORKDIR}/"
-    - "apt-cache show ${KALI_METAPACKAGE} | awk -F ': ' '/Depends/ {print $2}' | sed 's/,//g' | tr ' ' '\n' | tee ${WORKDIR}/package-list"
+    - |
+       apt-cache show ${KALI_METAPACKAGE} \
+       | awk -F ': ' '/Depends/ {print $2}' \
+       | sed 's_,__g' \
+       | sed 's_|_ _g' \
+       | tr ' ' '\n' \
+       | grep -v 'kali-linux-\|kali-tools-' \
+       | sed '/^$/d' \
+       | tee ${WORKDIR}/package-list
     - ./upstream-watch
 
   after_script:
