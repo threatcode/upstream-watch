@@ -47,9 +47,18 @@ pages:
 
   after_script:
     - mkdir -pv ./public/
-    - echo "<pre>" > ./public/index.html
-    - cat ${WORKDIR}/report >> ./public/index.html
-    - echo "</pre>" >> ./public/index.html
+    - |
+       cat << EOF > ./public/index.html
+       <h2>Report</h2>
+       <pre>
+       $( cat ${WORKDIR}/report )
+       </pre>
+       <hr>
+       <h2>Status</h2>
+       <pre>
+       $( cat ${WORKDIR}/status )
+       </pre>
+       EOF
 
   artifacts:
     paths:
