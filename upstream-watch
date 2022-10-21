@@ -1,4 +1,6 @@
 #!/bin/sh
+# Dependencies for this script
+# apt-get install wget devscripts xmlstarlet dctrl-tools
 
 set -e
 
@@ -14,9 +16,6 @@ PACKAGE_LIST=$BASEDIR/package-list
 if [ -e $BASEDIR/config ]; then
     . $BASEDIR/config
 fi
-
-# Dependencies for this script
-# apt-get install wget devscripts xmlstarlet dctrl-tools
 
 log() {
     if [ -n "$VERBOSE" ]; then
