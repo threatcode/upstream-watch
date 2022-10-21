@@ -38,11 +38,10 @@ pages:
     - |
        apt-cache show ${KALI_METAPACKAGE} \
        | awk -F ': ' '/Depends/ {print $2}' \
-       | sed 's_,__g' \
-       | sed 's_|_ _g' \
-       | tr ' ' '\n' \
+       | tr ',' '\n' \
+       | sed 's_|.*__g' \
+       | sed 's_^ __g' \
        | grep -v 'kali-linux-\|kali-tools-' \
-       | sed '/^$/d' \
        | tee ${WORKDIR}/package-list
     - ./upstream-watch
 
