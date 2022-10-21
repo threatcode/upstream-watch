@@ -28,7 +28,7 @@ update_package_list() {
     :> $WORKDIR/list
     for component in main contrib non-free; do
     wget -q $MIRROR/dists/$DIST/$component/source/Sources.gz -O - | \
-        gzip -dc >>$WORKDIR/list
+        gzip -dc >> $WORKDIR/list
     done
 }
 
@@ -73,7 +73,7 @@ extract_watch_files() {
     filename="$WORKDIR/tmp/$(basename $url)"
     target="$WORKDIR/watchfiles/$package"
     set +e
-    dscextract -f $filename debian/watch >${target}.new
+    dscextract -f $filename debian/watch > ${target}.new
     result=$?
     set -e
     rm -f $WORKDIR/tmp/*
@@ -91,19 +91,21 @@ extract_watch_files() {
         return
         ;;
     esac
-    grep -v "^${package}_" $WORKDIR/extracted >$WORKDIR/extracted.new || true
+    grep -v "^${package}_" $WORKDIR/extracted > $WORKDIR/extracted.new || true
     mv $WORKDIR/extracted.new $WORKDIR/extracted
-    echo "${package}_${version}" >>$WORKDIR/extracted
+    echo "${package}_${version}" >> $WORKDIR/extracted
     done
 }
 
 run_uscan() {
     local pkg=$1
     local version=$2
-    uscan --watchfile $WORKDIR/watchfiles/$pkg \
+    uscan \
+      --watchfile $WORKDIR/watchfiles/$pkg \
       --upstream-version $version \
-          --package $pkg \
-      --dehs --no-verbose
+      --package $pkg \
+      --dehs \
+      --no-verbose
 }
 
 extract_upstream_version() {
@@ -162,10 +164,10 @@ record_status() {
         ;;
     esac >> $WORKDIR/report
     # Store the new status
-    grep -v "^$pkg " $WORKDIR/status >$WORKDIR/status.new || true
-    echo "$pkg $status" >>$WORKDIR/status.new
+    grep -v "^$pkg " $WORKDIR/status > $WORKDIR/status.new || true
+    echo "$pkg $status" >> $WORKDIR/status.new
     mv $WORKDIR/status.new $WORKDIR/status
-} 
+}
 
 check_new_upstream_versions() {
     for package in $(list_packages); do
@@ -176,7 +178,7 @@ check_new_upstream_versions() {
     fi
     version=$(extract_field $package Version)
     debian_uversion=$(extract_upstream_version $version)
-    run_uscan $package $debian_uversion >$WORKDIR/tmp/uscan-stdout 2>$WORKDIR/tmp/uscan-stderr || true
+    run_uscan $package $debian_uversion > $WORKDIR/tmp/uscan-stdout 2> $WORKDIR/tmp/uscan-stderr || true
     status=$(get_uscan_field status)
     upstream_version=$(get_uscan_field upstream-version)
     upstream_url=$(get_uscan_field upstream-url)
