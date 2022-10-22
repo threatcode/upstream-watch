@@ -76,5 +76,5 @@ pages:
   image: 'debian:11-slim'
   before_script: ""
   script:
-    - for file in $( ls public | sort ); do echo "<a href='${file}'>$( echo ${file} | sed 's_^[0-9]*-\(.*\)\..*$_\1_' )</a><br />" >> "./public/index.html"; done
+    - for file in $( ls public | sort ); do echo "<a href='${file}'>$( echo ${file} | sed 's_^[0-9]*-\(.*\)\..*$_\1_' )</a><br />" | tee -a "./public/index.html"; done
     - 'echo "<p>Last Updated: <a href=${CI_PAGES_URL}>$( date -u )</a></p>" >> ./public/index.html'
