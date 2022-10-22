@@ -2,7 +2,7 @@
 # URL: https://gitlab.com/kalilinux/tools/upstream-watch
 # CI/CD -> Schedules -> New Schedule
 # - Description: `Daily`
-# - Interval Pattern: `Custom` -> `0 0 * * 0`
+# - Interval Pattern: `Custom` -> `0 0 * * *`
 # - Cron Timezone: `UTC`
 # - Target branch or tag: `master`
 # - Activated: `Enable`
@@ -10,57 +10,69 @@
 image: 'kalilinux/kali-rolling'
 
 stages:
-  - check_upstream
+  - update
+  - deploy
 
 variables:
   # Create a shallow git copy
   GIT_DEPTH: 1
-  # Which Kali metapackages to try
-  KALI_METAPACKAGE: kali-linux-large
   # Location to work
   WORKDIR: /tmp/upstream-watch
   # How much to show out on the screen (not in the report)
   VERBOSE: 1
 
-pages:
-  stage: check_upstream
+default:
   before_script:
     - apt-get update
+    # ./upstream-watch requirements
     - apt-get -y --no-install-recommends install wget devscripts xmlstarlet dctrl-tools
-
-  script:
-    # Some debian/watch files use git
-    - apt-get -y --no-install-recommends install git
+    # ./upstream-watch configurations
     - echo "WORKDIR=${WORKDIR}" > config
     - echo "VERBOSE=${VERBOSE}" >> config
     - echo "PACKAGE_LIST=${WORKDIR}/package-list" >> config
-    - mkdir -pv "${WORKDIR}/"
-    - |
-       apt-cache show ${KALI_METAPACKAGE} \
-       | awk -F ': ' '/Depends/ {print $2}' \
-       | tr ',' '\n' \
-       | sed 's_|.*__g' \
-       | sed 's_^ __g' \
-       | grep -v 'kali-linux-\|kali-tools-' \
-       | tee ${WORKDIR}/package-list
-    - ./upstream-watch
-
-  after_script:
-    - mkdir -pv ./public/
-    - |
-       cat << EOF > ./public/index.html
-       <h2>Report</h2>
-       <pre>
-       $( cat ${WORKDIR}/report )
-       </pre>
-       <hr>
-       <h2>Status</h2>
-       <pre>
-       $( cat ${WORKDIR}/status )
-       </pre>
-       EOF
-
+    # Some debian/watch files use git
+    - apt-get -y --no-install-recommends install git
+    # Create working folder
+    - mkdir -pv "${WORKDIR}/" ./public/
   artifacts:
     paths:
-      - public
+      - public/
     expire_in: 1 week
+
+top10:
+  stage: update
+  script:
+    - ./generate-html kali-tools-top10 > ./public/01-top10.html
+
+headless:
+  stage: update
+  script:
+    - ./generate-html kali-linux-headless > ./public/05-headless.html
+
+kalidefault:
+  stage: update
+  script:
+    - ./generate-html kali-linux-default > ./public/10-default.html
+
+large:
+  stage: update
+  script:
+    - ./generate-html kali-linux-large > ./public/15-large.html
+
+everything:
+  stage: update
+  script:
+    - ./generate-html kali-linux-everything > ./public/20-everything.html
+
+gitlab:
+  stage: update
+  script:
+    - apt-get -y --no-install-recommends install curl ca-certificates jq
+    - ./generate-gitlab-package-list | tee ${WORKDIR}/package-list
+    - ./generate-html > ./public/99-gitlab.html
+
+pages:
+  stage: deploy
+  script:
+    - for file in $( ls public | sort ); do echo "<a href='${file}'>$( echo ${file} | sed 's_^[0-9]*-\(.*\)\..*$_\1_' )</a><br />" >> "./public/index.html"; done
+    - 'echo "<p>Last Updated: <a href=${CI_PAGES_URL}>$( date -u )</a></p>" >> ./public/index.html'

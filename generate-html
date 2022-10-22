@@ -1,0 +1,59 @@
+#!/usr/bin/env sh
+
+## Quit on error
+set -e
+
+## Move to script location
+cd $(dirname $0)
+BASEDIR=$(pwd)
+
+## Default variables
+WORKDIR=$BASEDIR/work
+PACKAGE_LIST=$BASEDIR/package-list
+KALI_METAPACKAGE=${1}
+
+## User variables
+if [ -e $BASEDIR/config ]; then
+    . $BASEDIR/config
+fi
+
+if [ -n "${KALI_METAPACKAGE}" ]; then
+  ## Read in metapackages
+  apt-cache show ${KALI_METAPACKAGE} \
+    | awk -F ': ' '/Depends/ {print $2}' \
+    | tr ',' '\n' \
+    | sed 's_|.*__g' \
+    | sed 's_^ __g' \
+    | grep -v 'kali-linux-\|kali-tools-\|kali-desktop-' \
+    | tee ${PACKAGE_LIST} >&2
+fi
+
+## Start fresh
+rm -f ${WORKDIR}/status
+
+## Check
+./upstream-watch >&2
+
+## Generate HTML
+cat <<EOF
+<p>
+<ul>
+<li>Broken: $( grep -c " BROKEN$" ${WORKDIR}/status )</li>
+<li>Missing: $( grep -c " MISSING$" ${WORKDIR}/status )</li>
+<li>Outdated: $( grep -c " OUTDATED_" ${WORKDIR}/status )</li>
+<li>Up-to-date: $( grep -c " OK$" ${WORKDIR}/status )</li>
+</ul>
+</p>
+<p><a href="#report">Report</a> / <a href="#status">Status</a></p>
+<p>Last Updated: <a href="${CI_PAGES_URL}">$( date -u )</a></p>
+<hr>
+<h2 id="report">Report</h2>
+<pre>
+$( cat ${WORKDIR}/report )
+</pre>
+<hr>
+<h2 id="status">Status</h2>
+<pre>
+$( sort -k2 ${WORKDIR}/status )
+</pre>
+EOF
