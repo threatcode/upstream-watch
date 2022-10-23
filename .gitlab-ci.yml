@@ -74,7 +74,7 @@ gitlab:
 upstream-watch:
   stage: update
   script:
-    - ./package-list ${WORKDIR}/package-list
+    - cp -vf ./package-list ${WORKDIR}/package-list
     - ./generate-html > ./public/99-upstream-watch.html
 
 pages:
