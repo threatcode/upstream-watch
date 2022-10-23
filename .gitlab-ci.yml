@@ -69,7 +69,13 @@ gitlab:
   script:
     - apt-get -y --no-install-recommends install curl ca-certificates jq
     - ./generate-gitlab-package-list | tee ${WORKDIR}/package-list
-    - ./generate-html > ./public/99-gitlab.html
+    - ./generate-html > ./public/50-gitlab.html
+
+upstream-watch:
+  stage: update
+  script:
+    - ./package-list ${WORKDIR}/package-list
+    - ./generate-html > ./public/99-upstream-watch.html
 
 pages:
   stage: deploy
