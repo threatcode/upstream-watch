@@ -149,6 +149,8 @@ record_status() {
     case "$status" in
     OK)
         ;;
+    NATIVE)
+        ;;
     OUTDATED_*)
         echo "$pkg $version can be updated to new upstream version: $3"
         echo "Tarball is at $4"
@@ -176,6 +178,11 @@ record_status() {
 check_new_upstream_versions() {
 	log "Checking for updates"
     for package in $(list_packages); do
+        format=$(extract_field $package Format)
+        if echo "$format" | grep -q "^3.0 (native)$"; then
+            record_status $package NATIVE
+            continue
+        fi
         if [ ! -e $WORKDIR/watchfiles/$package ]; then
             log "WARNING: $package has no watch file in $DIST" >&2
             record_status $package MISSING

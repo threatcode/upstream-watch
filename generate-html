@@ -40,8 +40,9 @@ cat <<EOF
 <ul>
 <li>Broken: $( grep -c " BROKEN$" ${WORKDIR}/status )</li>
 <li>Missing: $( grep -c " MISSING$" ${WORKDIR}/status )</li>
-<li>Outdated: $( grep -c " OUTDATED_" ${WORKDIR}/status )</li>
+<li>Native: $( grep -c " NATIVE$" ${WORKDIR}/status )</li>
 <li>Up-to-date: $( grep -c " OK$" ${WORKDIR}/status )</li>
+<li>Outdated: $( grep -c " OUTDATED_" ${WORKDIR}/status )</li>
 </ul>
 </p>
 <p><a href="#report">Report</a> / <a href="#status">Status</a></p>
