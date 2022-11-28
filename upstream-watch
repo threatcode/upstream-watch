@@ -153,7 +153,7 @@ record_status() {
         ;;
     OUTDATED_*)
         echo "$pkg $version can be updated to new upstream version: $3"
-        echo "Tarball is at $4"
+        echo "Tarball is at: <a href='$4'>$4</a>"
         echo ""
         ;;
     BROKEN)
