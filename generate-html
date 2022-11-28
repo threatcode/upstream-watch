@@ -52,7 +52,7 @@ cat <<EOF
 <pre>
 $( cat ${WORKDIR}/report )
 </pre>
-<hr>
+<br>
 <h2 id="status">Status</h2>
 <pre>
 $( sort -k2 ${WORKDIR}/status | while read -r line; do echo "${line}" | sed -E 's_(.*) (.*)_<a href="https://pkg.kali.org/pkg/\1">\1</a> \2_'; done )
