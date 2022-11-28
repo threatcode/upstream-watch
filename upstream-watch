@@ -162,7 +162,7 @@ record_status() {
         echo ""
         ;;
     MISSING)
-        echo "The watch file is missing in $pkg $version in $DIST."
+        echo "The watch file is missing in $pkg $version in $DIST"
         echo ""
         ;;
     *)
@@ -229,7 +229,7 @@ setup_workdir() {
 send_report() {
     log "Generating report"
     if [ ! -s $WORKDIR/report ]; then
-        log "REPORT: Nothing new to report."
+        log "REPORT: Nothing new to report"
         exit 0
     fi
 
