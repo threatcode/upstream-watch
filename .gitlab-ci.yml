@@ -25,7 +25,7 @@ default:
   before_script:
     - apt-get update
     # ./upstream-watch requirements
-    - apt-get -y --no-install-recommends install wget devscripts xmlstarlet dctrl-tools
+    - apt-get -y --no-install-recommends install wget devscripts xmlstarlet dctrl-tools git
     # ./upstream-watch configurations
     - echo "WORKDIR=${WORKDIR}" > config
     - echo "VERBOSE=${VERBOSE}" >> config
