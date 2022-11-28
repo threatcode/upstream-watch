@@ -65,10 +65,10 @@ extract_watch_files() {
             continue
         fi
         url=$(dsc_url $package)
-        log "Extracting watch file from $url"
+        log "Extracting watch file from: $url"
         cd $WORKDIR/tmp
         if ! dget -q -u -d $url; then
-            echo "ERROR: downloading source package from $url" >&2
+            echo "ERROR: downloading source package from: $url" >&2
         fi
         cd $BASEDIR
         filename="$WORKDIR/tmp/$(basename $url)"
@@ -88,7 +88,7 @@ extract_watch_files() {
                 ;;
             *)
                 rm -f ${target}.new
-                echo "ERROR: extracting debian/watch from $filename" >&2
+                echo "ERROR: extracting debian/watch from: $filename" >&2
                 return
                 ;;
         esac
