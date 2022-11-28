@@ -83,4 +83,4 @@ pages:
   before_script: ""
   script:
     - for file in $( ls public | sort ); do echo "<a href='${file}'>$( echo ${file} | sed 's_^[0-9]*-\(.*\)\..*$_\1_' )</a><br />" | tee -a "./public/index.html"; done
-    - 'echo "<p>Last Updated: <a href=${CI_PAGES_URL}>$( date -u )</a></p>" >> ./public/index.html'
+    - 'echo "<p>Last Updated: <a href=${CI_PAGES_URL}>$( date -u )</a> (<a href="${CI_PROJECT_URL}">repo</a>)</p>" >> ./public/index.html'
