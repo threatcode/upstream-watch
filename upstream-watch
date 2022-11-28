@@ -34,7 +34,7 @@ update_package_list() {
 
 list_packages() {
     if [ -e "$PACKAGE_LIST" ]; then
-        grep -v '^#' $PACKAGE_LIST
+        grep -v '^#' $PACKAGE_LIST | grep -v -e '^[[:space:]]*$'
     else
         sed -n 's/^Package: //p' $WORKDIR/list
     fi
