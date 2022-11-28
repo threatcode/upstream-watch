@@ -129,11 +129,11 @@ get_uscan_field() {
 }
 
 dump_uscan_data() {
-    echo " STDOUT: "
-    sed -e 's/^/ /' $WORKDIR/tmp/uscan-stdout
+    echo "  STDOUT: "
+    sed -e 's/^/    /' $WORKDIR/tmp/uscan-stdout
     if [ -s $WORKDIR/tmp/uscan-stderr ]; then
-        echo " STDERR: "
-        sed -e 's/^/ /' $WORKDIR/tmp/uscan-stderr
+        echo "  STDERR: "
+        sed -e 's/^/    /' $WORKDIR/tmp/uscan-stderr
     fi
 }
 
