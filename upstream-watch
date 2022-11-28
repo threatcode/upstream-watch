@@ -19,12 +19,12 @@ fi
 
 log() {
     if [ -n "$VERBOSE" ]; then
-        echo "$*"
+        echo "[i] $*"
     fi
 }
 
 update_package_list() {
-    log "[i] Updating package list"
+    log "Updating package list"
     :> $WORKDIR/list
     for component in main contrib non-free; do
         wget -q $MIRROR/dists/$DIST/$component/source/Sources.gz -O - | \
@@ -54,7 +54,7 @@ dsc_url() {
 }
 
 extract_watch_files() {
-    log "[i] Extracting all watch files"
+    log "Extracting all watch files"
     for package in $(list_packages); do
         if ! grep -q "Package: $package" $WORKDIR/list; then
             echo "WARNING: $package is not available in $DIST" >&2
@@ -171,7 +171,7 @@ record_status() {
 }
 
 check_new_upstream_versions() {
-	log "[i] Checking for updates"
+	log "Checking for updates"
     for package in $(list_packages); do
         if [ ! -e $WORKDIR/watchfiles/$package ]; then
             log "WARNING: $package has no watch file in $DIST" >&2
@@ -209,7 +209,7 @@ check_new_upstream_versions() {
 }
 
 setup_workdir() {
-    log "[i] Setting up"
+    log "Setting up"
     mkdir -p $WORKDIR/tmp $WORKDIR/watchfiles
     touch $WORKDIR/extracted
     touch $WORKDIR/status
@@ -217,7 +217,7 @@ setup_workdir() {
 }
 
 send_report() {
-    log "[i] Generating report"
+    log "Generating report"
     if [ ! -s $WORKDIR/report ]; then
         log "REPORT: Nothing new to report."
         exit 0
