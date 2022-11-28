@@ -147,12 +147,12 @@ record_status() {
     # Fill out the report when something changed
     version=$(extract_field $package Version)
     case "$status" in
+    OK)
+        ;;
     OUTDATED_*)
         echo "$pkg $version can be updated to new upstream version: $3"
         echo "Tarball is at $4"
         echo ""
-        ;;
-    OK)
         ;;
     BROKEN)
         echo "The watch file of $pkg $version in $DIST is no longer working:"
