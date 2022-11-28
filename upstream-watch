@@ -163,6 +163,9 @@ record_status() {
         echo "The watch file is missing in $pkg $version in $DIST."
         echo ""
         ;;
+    *)
+        echo "ERROR: unknown status in record_status: $status" >&2
+        ;;
     esac >> $WORKDIR/report
     # Store the new status
     grep -v "^$pkg " $WORKDIR/status > $WORKDIR/status.new || true
