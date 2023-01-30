@@ -23,11 +23,11 @@ variables:
 
 default:
   before_script:
-    - apt-get update
+    - apt-get --quiet update
     # ./upstream-watch requirements
-    - apt-get -y --no-install-recommends install wget devscripts xmlstarlet dctrl-tools git
+    - apt-get --quiet --yes --no-install-recommends install wget devscripts xmlstarlet dctrl-tools git
     # ./upstream-watch configurations
-    - echo "WORKDIR=${WORKDIR}" > config
+    - echo "WORKDIR=${WORKDIR}"  > config
     - echo "VERBOSE=${VERBOSE}" >> config
     - echo "PACKAGE_LIST=${WORKDIR}/package-list" >> config
     # Create working folder
@@ -65,7 +65,7 @@ everything:
 gitlab:
   stage: update
   script:
-    - apt-get -y --no-install-recommends install curl ca-certificates jq
+    - apt-get --quiet --yes --no-install-recommends install curl ca-certificates jq
     - ./generate-gitlab-package-list | tee ${WORKDIR}/package-list
     - ./generate-html > ./public/50-gitlab.html
 

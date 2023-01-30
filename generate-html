@@ -4,17 +4,17 @@
 set -e
 
 ## Move to script location
-cd $(dirname $0)
-BASEDIR=$(pwd)
+cd $( dirname $0 )
+BASEDIR=$( pwd )
 
 ## Default variables
-WORKDIR=$BASEDIR/work
-PACKAGE_LIST=$BASEDIR/package-list
+WORKDIR=${BASEDIR}/work
+PACKAGE_LIST=${BASEDIR}/package-list
 KALI_METAPACKAGE=${1}
 
 ## User variables
-if [ -e $BASEDIR/config ]; then
-    . $BASEDIR/config
+if [ -e ${BASEDIR}/config ]; then
+  . ${BASEDIR}/config
 fi
 
 if [ -n "${KALI_METAPACKAGE}" ]; then
@@ -22,14 +22,14 @@ if [ -n "${KALI_METAPACKAGE}" ]; then
   apt-cache show ${KALI_METAPACKAGE} \
     | awk -F ': ' '/Depends/ {print $2}' \
     | tr ',' '\n' \
-    | sed 's_|.*__g' \
-    | sed 's_^ __g' \
+    | sed 's_|.*__g;
+           s_^ __g' \
     | grep -v 'kali-linux-\|kali-tools-\|kali-desktop-' \
     | tee ${PACKAGE_LIST} >&2
 fi
 
 ## Start fresh
-rm -f ${WORKDIR}/status
+rm -f "${WORKDIR}/status"
 
 ## Check
 ./upstream-watch >&2
