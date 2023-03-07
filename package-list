@@ -1,4 +1,5 @@
 aircrack-ng
+airgeddon
 amap
 amass
 arping
@@ -21,6 +22,7 @@ cowpatty
 crackmapexec
 creddump7
 crunch
+cyberchef
 davtest
 dbd
 dirb
@@ -65,6 +67,7 @@ joplin
 kerberoast
 king-phisher
 kismet
+kubernetes-helm
 laudanum
 lbd
 legion
@@ -116,6 +119,7 @@ rcracki-mt
 reaver
 rebind
 recon-ng
+redeye
 responder
 rfcat
 ridenum
@@ -150,6 +154,7 @@ termineter
 thc-ipv6
 thc-pptp-bruter
 theharvester
+thehive
 ubertooth
 unix-privesc-check
 valgrind
