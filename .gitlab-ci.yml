@@ -30,8 +30,6 @@ default:
     - echo "WORKDIR=${WORKDIR}" > config
     - echo "VERBOSE=${VERBOSE}" >> config
     - echo "PACKAGE_LIST=${WORKDIR}/package-list" >> config
-    # Some debian/watch files use git
-    - apt-get -y --no-install-recommends install git
     # Create working folder
     - mkdir -pv "${WORKDIR}/" ./public/
   artifacts:
