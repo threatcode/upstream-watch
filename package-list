@@ -2,6 +2,7 @@ aircrack-ng
 airgeddon
 amap
 amass
+arkime
 arping
 arp-scan
 asleap
@@ -11,6 +12,7 @@ beef-xss
 bettercap
 binwalk
 bloodhound
+bloodhound.py
 braa
 bulk-extractor
 bully
