@@ -37,6 +37,7 @@ dnsmap
 dnsrecon
 dradis
 edb-debugger
+eksctl
 enum4linux
 ettercap
 evil-winrm
@@ -176,6 +177,7 @@ winexe
 wireshark
 wordlists
 wpscan
+wsgidav
 xplico
 zaproxy
 
