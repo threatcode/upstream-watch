@@ -26,7 +26,7 @@ log() {
 update_package_list() {
     log "Updating package list"
     :> $WORKDIR/list
-    for component in main contrib non-free; do
+    for component in main contrib non-free non-free-firmware; do
         wget -q $MIRROR/dists/$DIST/$component/source/Sources.gz -O - | \
             gzip -dc >> $WORKDIR/list
     done
