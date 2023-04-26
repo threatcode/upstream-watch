@@ -17,6 +17,7 @@ braa
 bulk-extractor
 bully
 burpsuite
+calico
 cewl
 chntpw
 commix
@@ -59,6 +60,7 @@ hashcat
 hashcat-utils
 hashid
 hexinject
+hubble
 hydra
 ike-scan
 impacket
