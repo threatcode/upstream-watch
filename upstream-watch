@@ -182,7 +182,7 @@ check_new_upstream_versions() {
 	log "Checking for updates"
     for package in $(list_packages); do
         format=$(extract_field $package Format)
-        if echo "$format" | grep -q "^3.0 (native)$"; then
+        if [[ echo "$format" | grep -q "^3.0 (native)$" || [[ echo "$format" | grep -q "^1.0" ]]; then
             record_status $package NATIVE
             continue
         fi
