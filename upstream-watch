@@ -68,7 +68,7 @@ extract_watch_files() {
         log "Extracting watch file from: $url"
         cd $WORKDIR/tmp
         if ! dget -q -u -d $url; then
-            echo "ERROR: downloading source package from: $url" >&2 || true
+            echo "ERROR: downloading source package from: $url" >&2
         fi
         cd $BASEDIR
         filename="$WORKDIR/tmp/$(basename $url)"
