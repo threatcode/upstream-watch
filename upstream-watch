@@ -7,7 +7,7 @@ set -e
 cd $(dirname $0)
 BASEDIR=$(pwd)
 
-MIRROR=http://http.kali.org/kali
+MIRROR=http://archive.kali.org/kali
 DIST=kali-dev
 WORKDIR=$BASEDIR/work
 PACKAGE_LIST=$BASEDIR/package-list
