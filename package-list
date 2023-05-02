@@ -20,6 +20,7 @@ burpsuite
 calico
 cewl
 chntpw
+cilium-cli
 commix
 cowpatty
 crackmapexec
@@ -61,6 +62,7 @@ hashcat-utils
 hashid
 hexinject
 hubble
+humble
 hydra
 ike-scan
 impacket
