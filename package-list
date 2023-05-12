@@ -50,6 +50,7 @@ fern-wifi-cracker
 ffuf
 fierce
 gobuster
+gophish
 gpp-decrypt
 greenbone-security-assistant
 guymager
@@ -166,6 +167,7 @@ thc-ipv6
 thc-pptp-bruter
 theharvester
 thehive
+trivy
 ubertooth
 unix-privesc-check
 valgrind
