@@ -22,6 +22,7 @@ cewl
 chntpw
 cilium-cli
 commix
+cosign
 cowpatty
 crackmapexec
 creddump7
@@ -160,8 +161,10 @@ sslscan
 sslsplit
 sslyze
 statsprocessor
+syft
 tcpdump
 termineter
+terraform
 tetragon
 thc-ipv6
 thc-pptp-bruter
