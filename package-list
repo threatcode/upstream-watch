@@ -26,6 +26,7 @@ cosign
 cowpatty
 crackmapexec
 creddump7
+cri-tools
 crunch
 cyberchef
 davtest
@@ -174,6 +175,7 @@ theharvester
 thehive
 trivy
 ubertooth
+unblob
 unix-privesc-check
 valgrind
 veil
