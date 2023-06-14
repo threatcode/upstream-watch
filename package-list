@@ -163,6 +163,7 @@ ssldump
 sslscan
 sslsplit
 sslyze
+starkiller
 statsprocessor
 syft
 tcpdump
