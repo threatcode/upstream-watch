@@ -13,6 +13,7 @@ lookup_group() {
       --silent \
       --show-error \
       --fail \
+      --retry 5 \
       "https://gitlab.com/api/v4/groups/?search=${1}" \
     | jq -r '.[] | select (.full_path == "'${1}'") | .id' )
 
@@ -58,6 +59,7 @@ list_projects_name() {
       --silent \
       --show-error \
       --fail \
+      --retry 5 \
       "https://gitlab.com/api/v4/groups/${1}/projects/?order_by=name&sort=asc&per_page=100&page=${2}&archived=${3:-false}" \
     | jq -r '.[] | .name'
 }
