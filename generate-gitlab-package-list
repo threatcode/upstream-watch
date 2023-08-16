@@ -15,7 +15,9 @@ lookup_group() {
       --fail \
       --retry 5 \
       "https://gitlab.com/api/v4/groups/?search=${1}" \
-    | jq -r '.[] | select (.full_path == "'${1}'") | .id' )
+    | jq \
+        --raw-output \
+        '.[] | select (.full_path == "'${1}'") | .id' )
 
   echo "[>] Group: https://gitlab.com/${1} (${groupid})" >&2
 
@@ -61,7 +63,9 @@ list_projects_name() {
       --fail \
       --retry 5 \
       "https://gitlab.com/api/v4/groups/${1}/projects/?order_by=name&sort=asc&per_page=100&page=${2}&archived=${3:-false}" \
-    | jq -r '.[] | .name'
+    | jq \
+        --raw-output \
+        '.[] | .name'
 }
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
