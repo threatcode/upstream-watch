@@ -1,6 +1,6 @@
 #!/bin/sh
-# Dependencies for this script
-# apt-get install wget devscripts xmlstarlet dctrl-tools git
+# Dependencies for this script:
+#   apt update && apt install --yes --no-install-recommends wget devscripts xmlstarlet dctrl-tools git
 
 set -e
 

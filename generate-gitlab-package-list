@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-# Dependencies for this script
-# apt-get install curl ca-certificates jq
+# Dependencies for this script:
+#   apt update && apt install --yes --no-install-recommends curl ca-certificates jq
 
 set -eo pipefail
 set -e
