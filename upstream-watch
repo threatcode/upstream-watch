@@ -153,18 +153,21 @@ record_status() {
     NATIVE)
         ;;
     OUTDATED_*)
+        echo "<a name='$pkg'></a>"
         echo "$pkg $version can be updated to new upstream version: $3"
         echo "Tarball is at: <a href='$4'>$4</a>"
         echo ""
         echo "<hr>"
         ;;
     BROKEN)
+        echo "<a name='$pkg'></a>"
         echo "The watch file of $pkg $version in $DIST is no longer working:"
         dump_uscan_data
         echo ""
         echo "<hr>"
         ;;
     MISSING)
+        echo "<a name='$pkg'></a>"
         echo "The watch file is missing in $pkg $version in $DIST"
         echo ""
         echo "<hr>"
