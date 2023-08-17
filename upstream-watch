@@ -20,17 +20,18 @@ VERBOSE=${VERBOSE:-0}
 
 log() {
     if [ "$VERBOSE" -ge "1" ]; then
-        echo "[i] $*"
+        echo "[i] $*" >&2
     fi
 }
 
 update_network_list() {
-    log "Updating network package list"
+    log "Updating network package list: $NETWORK_LIST"
     :> $NETWORK_LIST
     for component in main contrib non-free non-free-firmware; do
         wget -q $MIRROR/dists/$DIST/$component/source/Sources.gz -O - | \
             gzip -dc >> $NETWORK_LIST
     done
+    log "Found $(list_packages | wc -l) packages"
 }
 
 list_packages() {
@@ -55,10 +56,10 @@ dsc_url() {
 }
 
 extract_watch_files() {
-    log "Extracting all watch files"
+    log "Extracting package's watch files"
     for package in $(list_packages); do
         if ! grep -q "Package: $package" $NETWORK_LIST; then
-            echo "WARNING: $package is not available in $DIST" >&2
+            echo "WARNING: $package is not available in: $DIST" >&2
             continue
         fi
         version=$(extract_field $package Version)
@@ -184,7 +185,7 @@ record_status() {
 }
 
 check_new_upstream_versions() {
-	log "Checking for updates"
+    log "Checking for updates via watch files"
     for package in $(list_packages); do
         format=$(extract_field $package Format)
         if echo "$format" | grep -q "^3\.0 (native)$" || echo "$format" | grep -q "^1\.0"; then
@@ -192,7 +193,7 @@ check_new_upstream_versions() {
             continue
         fi
         if [ ! -e $WORKDIR/watchfiles/$package ]; then
-            log "WARNING: $package has no watch file in $DIST" >&2
+            log "WARNING: $package has no watch file in $DIST"
             record_status $package MISSING
             continue
         fi
@@ -227,7 +228,7 @@ check_new_upstream_versions() {
 }
 
 setup_workdir() {
-    log "Setting up"
+    log "Setting up $(basename $0): $WORKDIR"
     mkdir -p $WORKDIR/tmp $WORKDIR/watchfiles
     touch $WORKDIR/extracted
     touch $WORKDIR/status
