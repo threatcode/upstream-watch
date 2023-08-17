@@ -36,7 +36,20 @@ update_network_list() {
 
 list_packages() {
     if [ -e "$PACKAGE_LIST" ]; then
-        grep -v '^#' $PACKAGE_LIST | grep -v -e '^[[:space:]]*$'
+         grep -v '^#' $PACKAGE_LIST \
+         | grep -v -e '^[[:space:]]*$' \
+         | sort \
+         | while read -r pkg; do
+            if ! grep -q "^Package: $pkg$" $NETWORK_LIST \
+            && grep -q -E "^Binary:.* $pkg(,|$)" $NETWORK_LIST; then
+                pkg_src=$( apt-cache show $pkg | awk -F '[: ]' '/^Source: / {print $3}' )
+                echo "WARNING: $pkg is a binary package name, not the source package name $pkg_src in $DIST" >&2
+                log "Switching from binary to source package name in: $PACKAGE_LIST"
+                sed -i "s|^$pkg$|$pkg_src|" $PACKAGE_LIST
+                pkg=$pkg_src
+            fi
+            echo $pkg
+         done
     else
         sed -n 's/^Package: //p' $NETWORK_LIST
     fi
