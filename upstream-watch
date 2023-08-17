@@ -13,6 +13,7 @@ fi
 
 WORKDIR=${WORKDIR:-$BASEDIR/work}
 PACKAGE_LIST=${PACKAGE_LIST:-$BASEDIR/package-list}
+NETWORK_LIST=${NETWORK_LIST:-$BASEDIR/list}
 MIRROR=${MIRROR:-http://http.kali.org/kali}
 DIST=${DIST:-kali-dev}
 VERBOSE=${VERBOSE:-0}
@@ -25,10 +26,10 @@ log() {
 
 update_package_list() {
     log "Updating package list"
-    :> $WORKDIR/list
+    :> $NETWORK_LIST
     for component in main contrib non-free non-free-firmware; do
         wget -q $MIRROR/dists/$DIST/$component/source/Sources.gz -O - | \
-            gzip -dc >> $WORKDIR/list
+            gzip -dc >> $NETWORK_LIST
     done
 }
 
@@ -36,14 +37,14 @@ list_packages() {
     if [ -e "$PACKAGE_LIST" ]; then
         grep -v '^#' $PACKAGE_LIST | grep -v -e '^[[:space:]]*$'
     else
-        sed -n 's/^Package: //p' $WORKDIR/list
+        sed -n 's/^Package: //p' $NETWORK_LIST
     fi
 }
 
 extract_field() {
     local pkg=$1
     local field=$2
-    grep-dctrl --exact-match -P $pkg --show-field $field --no-field-names < $WORKDIR/list || true
+    grep-dctrl --exact-match -P $pkg --show-field $field --no-field-names < $NETWORK_LIST || true
 }
 
 dsc_url() {
@@ -56,7 +57,7 @@ dsc_url() {
 extract_watch_files() {
     log "Extracting all watch files"
     for package in $(list_packages); do
-        if ! grep -q "Package: $package" $WORKDIR/list; then
+        if ! grep -q "Package: $package" $NETWORK_LIST; then
             echo "WARNING: $package is not available in $DIST" >&2
             continue
         fi
