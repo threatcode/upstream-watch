@@ -17,7 +17,7 @@ variables:
   # Create a shallow git copy
   GIT_DEPTH: 1
   # Location to work
-  WORKDIR: /tmp/upstream-watch
+  BASEDIR: /tmp/upstream-watch
   # How much to show out on the screen (not in the report)
   VERBOSE: 1
 
@@ -27,11 +27,11 @@ default:
     # ./upstream-watch requirements
     - apt-get --quiet --yes --no-install-recommends install wget devscripts xmlstarlet dctrl-tools git
     # ./upstream-watch configurations
-    - echo "WORKDIR=${WORKDIR}"  > config
-    - echo "VERBOSE=${VERBOSE}" >> config
-    - echo "PACKAGE_LIST=${WORKDIR}/package-list" >> config
+    - echo "MIRROR=http://kali.download/kali" >  config
+    - echo "BASEDIR=${BASEDIR}"               >> config
+    - echo "VERBOSE=${VERBOSE}"               >> config
     # Create working folder
-    - mkdir -pv "${WORKDIR}/" ./public/
+    - mkdir -pv "${BASEDIR}/" ./public/
   artifacts:
     paths:
       - public/
@@ -66,13 +66,13 @@ gitlab:
   stage: update
   script:
     - apt-get --quiet --yes --no-install-recommends install curl ca-certificates jq
-    - ./generate-gitlab-package-list | tee ${WORKDIR}/package-list
+    - ./generate-gitlab-package-list | tee ${BASEDIR}/package-list
     - ./generate-html > ./public/50-gitlab.html
 
 upstream-watch:
   stage: update
   script:
-    - cp -vf ./package-list ${WORKDIR}/package-list
+    - cp -vf ./package-list ${BASEDIR}/package-list
     - ./generate-html > ./public/99-upstream-watch.html
 
 pages:
