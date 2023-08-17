@@ -7,15 +7,15 @@ set -e
 cd $(dirname $0)
 BASEDIR=$(pwd)
 
-MIRROR=http://kali.download/kali
-DIST=kali-dev
-WORKDIR=$BASEDIR/work
-PACKAGE_LIST=$BASEDIR/package-list
-#VERBOSE=1
-
 if [ -e $BASEDIR/config ]; then
     . $BASEDIR/config
 fi
+
+WORKDIR=${WORKDIR:-$BASEDIR/work}
+PACKAGE_LIST=${PACKAGE_LIST:-$BASEDIR/package-list}
+MIRROR=${MIRROR:-http://http.kali.org/kali}
+DIST=${DIST:-kali-dev}
+VERBOSE=${VERBOSE:-0}
 
 log() {
     if [ -n "$VERBOSE" ]; then

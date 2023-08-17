@@ -7,15 +7,15 @@ set -e
 cd $( dirname $0 )
 BASEDIR=$( pwd )
 
-## Default variables
-WORKDIR=${BASEDIR}/work
-PACKAGE_LIST=${BASEDIR}/package-list
-KALI_METAPACKAGE=${1}
-
 ## User variables
 if [ -e ${BASEDIR}/config ]; then
   . ${BASEDIR}/config
 fi
+
+## Default variables
+KALI_METAPACKAGE=${1}
+WORKDIR=${WORKDIR:-$BASEDIR/work}
+PACKAGE_LIST=${PACKAGE_LIST:-$BASEDIR/package-list}
 
 if [ -n "${KALI_METAPACKAGE}" ]; then
   ## Read in metapackages
