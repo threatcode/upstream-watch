@@ -18,7 +18,7 @@ DIST=${DIST:-kali-dev}
 VERBOSE=${VERBOSE:-0}
 
 log() {
-    if [ -n "$VERBOSE" ]; then
+    if [ "$VERBOSE" -ge "1" ]; then
         echo "[i] $*"
     fi
 }
