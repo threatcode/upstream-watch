@@ -13,7 +13,7 @@ fi
 
 WORKDIR=${WORKDIR:-$BASEDIR/work}
 PACKAGE_LIST=${PACKAGE_LIST:-$BASEDIR/package-list}
-NETWORK_LIST=${NETWORK_LIST:-$BASEDIR/list}
+NETWORK_LIST=${NETWORK_LIST:-$BASEDIR/network-list}
 MIRROR=${MIRROR:-http://http.kali.org/kali}
 DIST=${DIST:-kali-dev}
 VERBOSE=${VERBOSE:-0}
@@ -24,8 +24,8 @@ log() {
     fi
 }
 
-update_package_list() {
-    log "Updating package list"
+update_network_list() {
+    log "Updating network package list"
     :> $NETWORK_LIST
     for component in main contrib non-free non-free-firmware; do
         wget -q $MIRROR/dists/$DIST/$component/source/Sources.gz -O - | \
@@ -257,7 +257,7 @@ END
 }
 
 setup_workdir
-update_package_list
+update_network_list
 extract_watch_files
 check_new_upstream_versions
 send_report
