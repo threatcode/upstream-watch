@@ -17,10 +17,12 @@ braa
 bulk-extractor
 bully
 burpsuite
+cabby
 calico
 cewl
 chntpw
 cilium-cli
+cti-taxii-client
 commix
 cosign
 cowpatty
@@ -111,6 +113,7 @@ nishang
 nmap
 nuclei
 onesixtyone
+opentaxii
 openvas-scanner
 ophcrack
 ospd-openvas
@@ -141,6 +144,7 @@ rfcat
 ridenum
 rizin
 rizin-cutter
+rling
 routersploit
 rsmangler
 rz-ghidra
