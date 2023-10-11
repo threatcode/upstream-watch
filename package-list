@@ -134,6 +134,7 @@ python-faraday
 python-ldapdomaindump
 radare2
 rainbowcrack
+raven
 rcracki-mt
 reaver
 rebind
@@ -157,6 +158,7 @@ set
 shellfire
 shellnoob
 shellter
+sigma,
 skipfish
 sleuthkit
 slimtoolkit
@@ -164,6 +166,7 @@ smbmap
 snmpcheck
 spiderfoot
 spike
+spire
 spooftooph
 sqlmap
 ssldump
