@@ -62,6 +62,7 @@ guymager
 gvmd
 gvm-libs
 gvm-tools
+h8mail
 hackrf
 hashcat
 hashcat-utils
@@ -141,6 +142,7 @@ rcracki-mt
 reaver
 rebind
 recon-ng
+reconspider
 redeye
 responder
 rfcat
@@ -165,6 +167,7 @@ skipfish
 sleuthkit
 slimtoolkit
 smbmap
+sn0int
 snmpcheck
 spiderfoot
 spike
