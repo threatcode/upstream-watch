@@ -169,6 +169,7 @@ slimtoolkit
 smbmap
 sn0int
 snmpcheck
+snort
 spiderfoot
 spike
 spire
@@ -212,4 +213,3 @@ wpscan
 wsgidav
 xplico
 zaproxy
-
